@@ -1,0 +1,20 @@
+name: Sync Copilot Instructions
+
+on:
+  workflow_dispatch: # Keep this if you still want manual triggers
+  push:
+    branches:
+      - main # Or your default branch name
+    paths:
+      - 'copilot-instructions/copilot-instructions.md' # Make sure this path is correct
+
+jobs:
+  sync-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync Files to Multiple Repos via API
+        uses: cloud-sky-ops/sync-files-multi-repo@v1.0.0-2
+        with:
+          github_token: ${{ secrets.COPILOT_INSTRUCTIONS_SYNC_TOKEN }}
+          copy-from-directory: copilot-instructions
+          copy-to-directory: .github
