@@ -1,3 +1,5 @@
 justinjohnso/copilot-instructions
 justinjohnso-itp/sinetactophone-daisyduino
 justinjohnso-itp/collapser
+justinjohnso-itp/cdev-github-repo
+justinjohnso-itp/cdev-final
