@@ -3,3 +3,16 @@ justinjohnso-itp/sinetactophone-daisyduino
 justinjohnso-itp/collapser
 justinjohnso-itp/cdev-github-repo
 justinjohnso-itp/cdev-final
+justinjohnso-itp/new-arcade-final-unity
+justinjohnso-itp/pcomp-final
+justinjohnso-itp/cdev-iot-device-project
+justinjohnso-itp/cmus-github-repo
+justinjohnso-itp/arc-midterm
+justinjohnso-itp/narr-github-repo
+justinjohnso-itp/narr-twine-project
+justinjohnso-itp/cmus-interactive-composition
+justinjohnso-itp/icm-media
+justinjohnso-itp/hypercinema-final
+justinjohnso-itp/pcomp
+justinjohnso-itp/pcomp-midterm
+justinjohnso/nextjs-portfolio
