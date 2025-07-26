@@ -14,9 +14,9 @@ This document provides guidance for GitHub Copilot to generate code and terminal
 
 ---
 
-## 🧰 Use Copilot Chat Commands Actively
+## 🧰 Use Copilot Chat Commands & Tools Actively
 
-Copilot should use its tools proactively to write better code and provide context. Commands that must be used regularly:
+Copilot should use its tools proactively to write better code and provide context. Commands and patterns that must be used regularly:
 
 - **/explain** — Before modifying complex, unfamiliar, or critical code, explain its current functionality and potential impact of changes. Also use to clarify generated code upon request.
 - **/fix** — Apply only after investigating the root cause via `/terminal`, `/problems`, or explicit debugging steps discussed in chat. Explain the fix being applied.
@@ -24,6 +24,14 @@ Copilot should use its tools proactively to write better code and provide contex
 - **/problems** — Review issues in the Problems panel before making assumptions about errors or required changes. Reference specific problem messages if relevant.
 - **/terminal** — Check recent terminal output for errors, crashes, logs, or build/test results before proposing fixes or proceeding with tasks that depend on previous commands succeeding.
 - **/optimize** — Only propose optimizations *after* baseline functionality is confirmed correct and adequately tested. Prioritize clarity unless performance is a documented requirement. Explain the trade-offs of the optimization.
+
+### 🔧 Advanced Tool Integration
+
+- **Context-Aware File Operations**: When reading files, prefer reading larger, meaningful chunks rather than small consecutive sections. Use semantic understanding to identify related code blocks.
+- **Workspace Analysis**: Before suggesting changes, analyze the broader workspace structure to understand existing patterns, dependencies, and architectural decisions.
+- **Multi-File Coordination**: When changes span multiple files, coordinate edits to maintain consistency across the codebase. Use tools to verify that cross-file references remain valid.
+- **Incremental Development**: Break complex tasks into smaller, testable increments. Verify each step before proceeding to the next.
+- **Error Context Gathering**: When encountering errors, gather comprehensive context including recent changes, environment state, and related configuration before proposing solutions.
 
 ---
 
@@ -43,6 +51,16 @@ Follow consistent structure across projects (backend, frontend, full-stack):
 - Use standard folder structures like `components/`, `hooks/`, `store/` (or `state/`), `styles/`, `pages/` (or `views/`), `lib/` (or `utils/`), `api/`.
 - Favor functional components and hooks over class components unless the existing codebase predominantly uses classes.
 - Maintain clear separation of concerns: keep UI rendering logic (JSX), state management (hooks, stores), data fetching/API calls, and styling distinct.
+- **Modern React Patterns**: Use React 18+ features like concurrent features, Suspense boundaries, and error boundaries appropriately. Prefer `useTransition` and `useDeferredValue` for performance-critical updates.
+- **TypeScript Integration**: Use strict TypeScript configurations. Leverage discriminated unions, branded types, and utility types for robust type safety.
+- **Component Architecture**: Design components with clear props interfaces, proper error boundaries, and predictable state management. Use composition over inheritance.
+
+### Full-Stack & Modern Patterns
+
+- **API Design**: Follow RESTful principles or GraphQL best practices. Use consistent error handling, proper HTTP status codes, and comprehensive request/response validation.
+- **State Management**: Choose appropriate state management solutions (Context API, Zustand, Redux Toolkit) based on complexity. Avoid over-engineering simple state needs.
+- **Real-time Features**: When implementing real-time functionality, consider WebSockets, Server-Sent Events, or modern solutions like WebRTC for different use cases.
+- **Edge Computing**: Design with edge computing in mind when appropriate. Consider geo-distributed architectures for performance-critical applications.
 
 ---
 
@@ -77,12 +95,19 @@ Follow consistent structure across projects (backend, frontend, full-stack):
     - Error handling paths (e.g., simulating exceptions, invalid inputs, network failures, permission errors).
     - Validation of input sanitization and security controls (e.g., testing against injection patterns).
     - Relevant integration points.
+    - **Property-based testing** for complex algorithms where applicable (use libraries like `fast-check` for JS/TS or `hypothesis` for Python).
 - **Test Quality:** Generated tests should be clear, readable, maintainable, and provide specific, meaningful assertions. Avoid trivial tests (e.g., `assert true`) or tests that merely duplicate the implementation logic. Tests should fail for the right reasons.
+- **Modern Testing Practices:**
+    - **Snapshot Testing**: Use sparingly and only for stable UI components. Update snapshots deliberately, not automatically.
+    - **Component Testing**: For React components, test behavior and user interactions, not implementation details.
+    - **API Testing**: Include contract testing for APIs using tools like Pact or OpenAPI validation.
+    - **Performance Testing**: Include performance assertions for critical paths using tools like Lighthouse CI or custom benchmarks.
 - **Frameworks & Location:**
     - JS/TS: Use `jest` or `vitest`. Place test files in `__tests__/` directories or adjacent to source files using `.test.ts` / `.test.js` / `.spec.ts` / `.spec.js` extensions.
     - Python: Use `pytest`. Place tests in a dedicated `tests/` directory mirroring the source structure.
 - **Integration Testing:** For code involving interactions between different modules, components, services, or external systems (APIs, databases), ensure that relevant integration tests are generated or updated to verify these interactions.
 - **Testing AI-Generated Code:** Recognize that code generated or significantly modified by AI requires particularly rigorous testing due to the potential for subtle logical flaws, missed edge cases, or security vulnerabilities not immediately apparent. Use testing as a primary mechanism to validate the *correctness* and *safety* of AI suggestions, not just their syntactic validity.
+- **Test Data Management**: Use factories, fixtures, or builders for test data. Avoid hardcoded test data that makes tests brittle. Consider using tools like Faker.js for realistic test data generation.
 
 ---
 
@@ -105,10 +130,20 @@ Follow consistent structure across projects (backend, frontend, full-stack):
     - Prioritize stable, actively maintained libraries from reputable sources.
     - Check for known vulnerabilities *before* incorporating them (see Environment & Dependency Management section).
     - Prefer libraries with a proven track record of security updates.
+    - Use `npm audit`, `pnpm audit`, or equivalent tools regularly.
 - **Output Escaping:** Always escape dynamic output appropriately in templates (JSX, Jinja2, EJS, etc.) or when constructing HTML, SQL, or shell commands to prevent XSS and other injection attacks. Use framework-specific escaping mechanisms where available.
 - **Least Privilege Principle:** Generated code, configurations, or infrastructure definitions should adhere to the principle of least privilege. Grant only the minimum permissions necessary for the code to perform its intended function. Avoid overly broad access rights.
 - **Avoid Dangerous Functions:** Avoid using inherently dangerous functions or patterns like `eval()`, `exec()`, `pickle` with untrusted data, or direct execution of shell commands constructed from user input, unless absolutely necessary, sandboxed, and explicitly approved.
 - **Authentication & Authorization:** Implement standard, robust authentication and authorization mechanisms. Do not invent custom crypto or authentication schemes. Ensure authorization checks are performed on all protected endpoints/operations.
+- **Modern Security Patterns:**
+    - **Content Security Policy (CSP)**: Implement strict CSP headers for web applications.
+    - **CSRF Protection**: Use anti-CSRF tokens for state-changing operations.
+    - **Rate Limiting**: Implement rate limiting for public APIs and authentication endpoints.
+    - **Secure Headers**: Include security headers like HSTS, X-Frame-Options, and X-Content-Type-Options.
+- **AI-Specific Security Considerations:**
+    - **Prompt Injection Defense**: When building AI-integrated applications, implement robust input filtering and context isolation to prevent prompt injection attacks.
+    - **Data Exposure Prevention**: Ensure AI models don't inadvertently expose sensitive data through completion suggestions or training data leakage.
+    - **Model Integrity**: When using local AI models, verify model integrity and use secure model loading practices.
 - **Explicitly Avoid Common Pitfalls:** Actively avoid generating code that employs known insecure practices or patterns. Examples include: using weak or deprecated cryptographic algorithms (e.g., MD5/SHA1 for passwords), disabling security features without explicit user confirmation, implementing insecure file upload handling, using default credentials, generating predictable random numbers for security purposes, or having overly permissive CORS configurations. If such a pattern seems necessary, flag it and request explicit confirmation.
 - **Awareness of LLM/AAI Risks:** Be mindful of potential prompt injection, jailbreaking, or context manipulation risks. Verify that generated code does not inadvertently bypass security controls, leak sensitive context, or execute unintended actions based on potentially manipulated instructions or context (e.g., instructions embedded in external configuration or documentation files referenced ).
 - **Keep Dependencies Updated:** Regularly update dependencies to patch known vulnerabilities (facilitated by vulnerability scanning and lock files).
@@ -123,6 +158,32 @@ Follow consistent structure across projects (backend, frontend, full-stack):
 - **Database Queries:** Write efficient database queries. Select only necessary fields. Use indexes appropriately. Avoid N+1 query problems in ORMs. Use database connection pooling.
 - **Large Data Sets:** Use pagination, streaming, or lazy loading techniques when dealing with potentially large data sets to avoid excessive memory consumption or network traffic.
 - **Resource Management:** Ensure resources like file handles or network connections are properly closed or released, even in error scenarios (e.g., using `try...finally` or context managers like Python's `with` statement).
+- **Modern Performance Patterns:**
+    - **Lazy Loading**: Implement lazy loading for components, images, and data that aren't immediately needed.
+    - **Memoization**: Use React.memo, useMemo, and useCallback judiciously. Don't over-memoize simple operations.
+    - **Virtual Scrolling**: For large lists, consider virtual scrolling libraries to maintain performance.
+    - **Code Splitting**: Implement strategic code splitting using dynamic imports and bundler features.
+    - **Web Vitals**: Monitor and optimize Core Web Vitals (LCP, FID, CLS) for web applications.
+- **Caching Strategies:**
+    - **HTTP Caching**: Implement appropriate cache headers and ETags for static resources.
+    - **Application Caching**: Use Redis or similar for session storage and frequently accessed data.
+    - **CDN Integration**: Leverage CDNs for static asset delivery and edge caching.
+- **Bundle Optimization:**
+    - **Tree Shaking**: Ensure build tools can eliminate dead code effectively.
+    - **Compression**: Use Gzip/Brotli compression for all text assets.
+    - **Image Optimization**: Use modern image formats (WebP, AVIF) with appropriate fallbacks.
+
+---
+
+## 🤖 AI-Native Development Patterns
+
+- **Context-Aware Coding**: Structure code and comments to provide maximum context for AI assistants. Use descriptive variable names, clear function signatures, and meaningful module organization.
+- **Incremental Complexity**: Build complex systems incrementally, testing each component thoroughly before adding the next layer. This approach helps AI assistants understand and extend your code more effectively.
+- **Pattern Documentation**: When implementing custom patterns or domain-specific logic, include clear comments explaining the approach and rationale. This helps AI assistants maintain consistency when extending the code.
+- **Error-Driven Development**: Use comprehensive error handling and logging to create clear failure modes that AI assistants can understand and debug effectively.
+- **Modular Architecture**: Design systems with clear module boundaries and well-defined interfaces. This enables AI assistants to work on individual components without breaking the overall system.
+- **Test-Driven Clarity**: Write tests that serve as both validation and documentation. Well-written tests help AI assistants understand expected behavior and edge cases.
+- **Configuration Over Hardcoding**: Use configuration files and environment variables to make systems adaptable without code changes. This makes it easier for AI assistants to suggest modifications without touching core logic.
 
 ---
 
@@ -167,11 +228,19 @@ Follow consistent structure across projects (backend, frontend, full-stack):
 To ensure consistency, efficiency, and safety in terminal operations, adhere to the following guidelines when generating or suggesting terminal commands:
 
 - **Package Management:** Prefer `pnpm` for Node.js projects due to its speed and disk space efficiency (`pnpm install`, `pnpm add`, `pnpm run`). For Python, use `pip` (often with `pip-tools` for compiling `requirements.txt`) or `poetry` as dictated by the project setup.
+- **Modern Development Tools:**
+    - **Build Tools**: Prefer modern build tools like Vite, esbuild, or SWC for faster development cycles.
+    - **Linting & Formatting**: Use `eslint --fix` and `prettier --write` for automated code formatting. Include `--cache` flags where available for better performance.
+    - **Type Checking**: Use `tsc --noEmit` for TypeScript type checking without compilation in CI/CD pipelines.
 - **Path Specifications:** Use relative paths when appropriate within the project structure. Use absolute paths primarily when referencing system-wide locations or when necessary to avoid ambiguity, clearly indicating if a path needs user configuration.
 - **Command Verification:** Before suggesting commands that modify the filesystem (e.g., `rm`, `mv`), install packages (`pnpm add`, `pip install`), or execute scripts with potential side effects, clearly state the command's purpose and potential impact. For destructive commands, advise caution or suggest a dry run if available.
 - **Alias Usage:** Do not rely on shell aliases being present in the user's environment. Generate the full commands required. Suggest creating aliases only if explicitly asked or as a separate optional tip.
 - **Environment Consistency:** Assume environment variables are loaded via `.env` files as per project standards. Do not suggest exporting secrets directly in the terminal.
 - **Scripting:** When generating shell scripts (`.sh`), include comments (`#`) to explain complex commands or logical sections. Use `set -e` to ensure scripts exit on error. Validate inputs where appropriate.
+- **Performance Optimization:**
+    - **Parallel Execution**: Use `&` for running independent tasks in parallel where appropriate.
+    - **Cache Utilization**: Leverage package manager caches and build caches to speed up operations.
+    - **Selective Operations**: Use glob patterns and selective flags to avoid unnecessary work (e.g., `--changed` flags in monorepos).
 
 ---
 
@@ -280,6 +349,14 @@ In addition to the chat commands in `/`, the following behaviors are defined for
 3. **Location:** Project root directory by default, unless user specifies otherwise.
 4. **Content:** Follow established best practices for READMEs (Title, Description, Install, Usage, Config, Contributing, License). Populate sections using project context. Adhere to existing structure if updating.
 5. **Guidelines:** Ensure installation/config instructions align with project standards (e.g., `pnpm`, `.env` usage).
+
+### `generate docs` (or similar requests)
+
+1. **Input:** Current codebase context, existing documentation structure, and specific documentation requirements.
+2. **Action:** Generate comprehensive API documentation, architecture docs, or user guides.
+3. **Format:** Use appropriate documentation formats (Markdown, JSDoc, Sphinx for Python, etc.) based on project ecosystem.
+4. **Content:** Include code examples, API references, setup instructions, and troubleshooting guides. Ensure documentation matches actual implementation.
+5. **Maintenance:** Structure documentation to be maintainable and updateable as code evolves.
 
 ---
 
