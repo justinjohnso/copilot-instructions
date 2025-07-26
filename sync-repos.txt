@@ -17,4 +17,4 @@ justinjohnso-itp/pcomp
 justinjohnso-itp/pcomp-midterm
 justinjohnso/nextjs-portfolio
 justinjohnso/music-downloader
-https://github.com/justinjohnso/motion-notion-sync
+justinjohnso/motion-notion-sync
