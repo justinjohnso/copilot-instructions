@@ -7,6 +7,7 @@ This repository manages the central `copilot-instructions.md` file used to provi
 1.  **`copilot-instructions/copilot-instructions.md`**:
     *   This is the main file containing the detailed instructions for GitHub Copilot.
     *   It defines project standards, coding practices, security guidelines, documentation styles, and specific command behaviors.
+    *   **Enhanced Documentation Generation:** Includes comprehensive guidelines for generating development logs and blog posts that authentically replicate the author's voice, with specific attention to stream-of-consciousness technical writing, iterative design documentation, and honest assessment of development processes.
     *   The workflow copies this file to the `.github/` directory of target repositories for Copilot to recognize it.
 
 2.  **`sync-repos.txt`**:
@@ -30,14 +31,23 @@ This repository manages the central `copilot-instructions.md` file used to provi
 
 ## Usage
 
-*   Modify the `copilot-instructions/copilot-instructions.md` file in this repository to update the guidelines.
-*   Commit and push the changes to the `main` branch.
-*   The GitHub Action will automatically run and sync the updated file to the configured target repositories.
-*   You can also manually trigger the workflow from the "Actions" tab of this repository if needed.
+*   **Modify Instructions:** Update the `copilot-instructions/copilot-instructions.md` file in this repository to change guidelines, coding standards, or documentation generation rules.
+*   **Automatic Sync:** Commit and push changes to the `main` branch. The GitHub Action will automatically run and sync the updated file to the configured target repositories.
+*   **Manual Trigger:** You can also manually trigger the workflow from the "Actions" tab of this repository if needed.
+*   **Documentation Generation:** The instructions include specific command behaviors:
+    *   **`write a blog post`**: Generates development logs/blog posts that emulate the author's voice, focusing on technical decision-making, iterative design processes, and honest assessment of development challenges.
+    *   **`export chat history`**: Saves chat session history to `.github/chat-logs/` for reference.
+    *   **`write a readme`**: Generates or updates README files based on project context and established best practices.
 
 ## Contributing
 
 Updates to the core instructions should be made directly in this repository's `copilot-instructions/copilot-instructions.md` file. Ensure changes align with the overall project goals and standards.
+
+**Key Areas for Updates:**
+*   **Coding Standards:** Language-specific style guides, testing requirements, security practices
+*   **Documentation Generation:** Voice emulation guidelines, reference examples, blog post structure patterns
+*   **Command Behaviors:** Specific instructions for `write a blog post`, `export chat history`, and other custom commands
+*   **Project Structure:** File organization patterns for different project types (backend, frontend, full-stack)
 
 ## License
 

@@ -263,40 +263,60 @@ When provided with links to example code (e.g., GitHub repositories, gists, code
 
 When asked to generate a write-up, development log, or blog post (e.g., via the `write a blog post` command), GitHub Copilot **must strictly adhere to these guidelines** to generate documentation that authentically replicates the author's specific voice, style, and documentation philosophy, as exemplified by the **Reference Examples**. The **non-negotiable primary goal** is meticulous emulation of the author's style found in the references, **not** the creation of generic blog content, formal tutorials, or textbook-like manuals. This requires documenting the development *process* with extreme fidelity, capturing the *experience* of building or creating something. Think of it as a detailed personal record: "I made this thing; here's exactly what I did, thought, and encountered," rather than a guide designed primarily for others.
 
+### 🎯 Reference Analysis Protocol
+
+- **MANDATORY**: Before generating any content, if reference examples are not provided in the current context, explicitly request access to 2-3 of the most relevant reference examples from the list below based on the technical domain or project type.
+- **Deep Pattern Analysis**: When reference examples are available, analyze them for:
+  - Sentence structure patterns and rhythm
+  - Technical detail density and presentation style
+  - Problem-solving narrative flow
+  - Specific vocabulary choices and technical terminology usage
+  - Transition patterns between different phases of work
+  - How uncertainty, iteration, and debugging are documented
+- **Voice Fingerprinting**: Identify the author's distinctive writing "fingerprint" - recurring phrases, sentence starters, ways of expressing frustration or success, and technical explanation patterns.
+
 ### ✅ Voice & Style: Emulate the Author (Mandatory Requirements)
 
-- **Reflective & Factual First-Person Tone**: **MANDATORY**. Consistently use "I," "my," "me." Describe actions *and* the concurrent thought process (e.g., "I decided to use library X because I needed feature Y," "I noticed the output was Z, which made me think the issue was..."). Focus relentlessly on documenting the *exact* sequence of thoughts, actions, trials, errors, and insights *as they occurred in real time*. Honesty about difficulties, dead ends, and moments of confusion is paramount. Write as if documenting your own process for your future self or a close collaborator, capturing the *experience* of the work.
-- **Technically Specific but Personal**: **MANDATORY**. Include precise technical artifacts: correctly formatted code snippets, exact error messages, specific commands used, relevant configuration details. Crucially, provide **inline rationale** explaining the *why* behind technical choices, observations, or debugging steps *at the exact moment they are described*. Assume general technical fluency but briefly explain project-specific context only if absolutely necessary for understanding the step described. The goal is to document *your* specific journey, not create a general guide.
-- **Direct, Concise, Natural Language**: **MANDATORY**. Write directly and plainly. **Eliminate** filler words, hedging phrases, and unnecessary introductory clauses (e.g., avoid starting sentences with "In order to...", "It should be noted that...", "I proceeded to..."). Use clear, everyday language consistent with the examples. **Actively vary sentence length**; short sentences and single-sentence paragraphs are encouraged for clarity, emphasis, and pacing. Avoid jargon unless it's common in the examples or briefly defined in context. Keep it grounded in your personal experience.
-- **Chronological/Logical Process Reporting**: **MANDATORY**. Structure the text **strictly** according to the sequence in which events happened or the logical path taken during troubleshooting or development. **Do not** reorder events for narrative effect or to create a smoother story. The process itself, with all its detours, dictates the structure. This is a log of *what happened*, not a polished tutorial.
+- **Direct Technical Documentation with Stream-of-Consciousness Flow**: **MANDATORY**. Focus on what was built, what problems were solved, and how, but allow for natural tangents, pivots, and evolving thoughts. Use clear, straightforward language that explains technical decisions while capturing the iterative nature of development.
+- **Problem-Solution-Iteration Structure**: **MANDATORY**. Organize content around specific technical challenges and their solutions, but include pivots, false starts, and evolving approaches ("Aaaand we pivoted again", "As I was working on building out the actual *game* part...").
+- **Conversational and Candid Tone**: **MANDATORY**. Use first person with natural, casual language. Include honest reactions to setbacks and changes ("which was 100% true, and would have been absurd to try to pull off", "Despite (maybe because of) having a background in web development").
+- **Specific Technical Details with Context**: **MANDATORY**. Include exact library names, version numbers, configuration details, file paths, and code snippets, but weave them into the natural flow of problem-solving and decision-making.
+- **Iterative Design Thinking Documentation**: **MANDATORY**. Show the evolution of ideas, including abandoned approaches and the reasoning behind changes. Document open questions and areas of uncertainty ("There are still a lot of open questions I need to figure out").
+- **Natural Technical Decision Flow**: **MANDATORY**. Document decisions as they unfold, including the thought process behind tool choices and implementation approaches. Show how constraints and feedback influenced direction.
 
 ### 🧱 Structure Patterns: Follow the Examples (Mandatory Requirements)
 
-- **Context First**: Start **directly** with the specific problem, task, observation, or goal that initiated the work segment being documented. **No generic introductions**.
-- **Inline Context & Rationale**: **Integrate** explanations for decisions *within* the description of the action itself. Do not separate 'what was done' from 'why it was done'.
-- **Beat-by-Beat Reporting**: Detail **all** significant steps, **especially** including failed attempts, specific debugging actions ("Checked the server logs," "Added a `console.log` here," "Googled the error message 'XYZ'"), moments of confusion ("I wasn't sure why X was happening"), and subsequent corrections or changes in direction. Show the *real*, often non-linear, iterative path.
-- **Short, Focused Paragraphs**: Use brief paragraphs, often just 2-4 sentences, centered on a single step, thought, observation, or code block. Use line breaks effectively to visually separate distinct steps or ideas.
-- **Abrupt Endings Expected**: End the log **immediately** when the relevant work segment or thought process being documented is complete. **Do not** add concluding summaries, overall reflections, "next steps," or future outlooks unless documenting such a reflection was explicitly part of the final step taken.
+- **Functional but Casual Section Headers**: **MANDATORY**. Use descriptive section headers that indicate progress or focus areas, but allow for informal language ("Aaaand we pivoted again", "Why am I changing things up?", "Wibbly-wobbly timey-wimey stuff"). Headers should reflect the actual development experience.
+- **Brainstorming and Decision Documentation**: **MANDATORY**. Include lists of options considered, approaches tried, and reasons for changes. Show the iterative decision-making process with bullet points and natural explanations.
+- **Open Questions and Uncertainty**: **MANDATORY**. Explicitly document areas of uncertainty, open design questions, and things that still need to be figured out. This shows the real, ongoing nature of development work.
+- **Technical Implementation with Context**: **MANDATORY**. Follow problem identification with implementation details, but include the reasoning, constraints, and feedback that influenced the approach.
+- **Natural Flow with Tangents**: **MANDATORY**. Allow the structure to follow the actual development process, including side thoughts, inspirations, and connections to other projects or ideas.
+- **Before/After Comparisons with Honesty**: **MANDATORY**. Show what changed and why, but include honest assessments of what didn't work or what was "absurd to try to pull off".
+- **Process Documentation with Personality**: **MANDATORY**. Document the actual steps taken, but include natural reactions, frustrations, and moments of realization that occurred during development.
 
 ### 📌 Stylistic Elements to Replicate (Mandatory Requirements)
 
-- **Specific Technical Details**: **MANDATORY**. Show, don't just tell. Embed correctly formatted code snippets (using appropriate Markdown syntax), shell commands, error outputs, relevant configuration snippets, etc., directly into the narrative flow where they occurred.
-- **Record of Uncertainty & Iteration**: **MANDATORY**. Explicitly state when unsure ("I wasn't sure how to approach...", "It took several tries to get the syntax right..."), describe the specific debugging process ("The error `ABC` suggested a type mismatch, so I checked the variable declaration..."), and explain how solutions evolved ("Initially, I tried approach X, but it failed because of Y, so I switched to approach Z..."). Capture the non-linear reality of development.
-- **Genuine Personal Reactions (Inline & Brief)**: Use **sparingly**, only if authentic to the moment and reflecting the tone in examples. Short, integrated phrases like "That was surprisingly tricky," "Finally got it working!", "I didn't expect that behavior," are acceptable. Keep them concise and part of the flow.
-- **Links to Resources (Contextual)**: Include links to documentation, Stack Overflow answers, relevant articles, GitHub issues, etc., *exactly at the point in the narrative* where they were consulted or influenced a decision or understanding.
+- **Technical Implementation with Personality**: **MANDATORY**. Emphasize the "how" of technical solutions with specific details, but include natural commentary and reactions ("It took a bit to find a library for the sensor and get the settings dialed in").
+- **Honest Assessment of Approaches**: **MANDATORY**. Document what worked, what didn't, and frank evaluations of decisions ("which was 100% true, and would have been absurd to try to pull off", "I'm not a fan of manually coding stuff in HTML and CSS").
+- **Tool and Library Specificity with Experience**: **MANDATORY**. Always mention specific tools and libraries, but include the context of discovering, choosing, or struggling with them ("VL53L0X time-of-flight sensor", "implemented it with help from this example").
+- **Design Process Documentation**: **MANDATORY**. Show the iterative design thinking process, including inspiration sources, constraint identification, and evolving requirements. Include external references and influences naturally.
+- **Casual Technical Problem-Solving**: **MANDATORY**. Document debugging and problem-solving with natural language ("Wibbly-wobbly timey-wimey stuff", "Soooo we're using Chart.js"). Include moments of realization and "aha" discoveries.
+- **Visual Documentation Integration**: **MANDATORY**. Include screenshots, prototypes, and visual examples as natural parts of the development story. Reference visuals that show progress and iteration.
+- **Stream-of-Consciousness Technical Thinking**: **MANDATORY**. Allow for natural thought progression, including side thoughts, connections to other projects, and evolving understanding of the problem space.
+- **Constraint-Driven Decision Making**: **MANDATORY**. Show how technical and design constraints influenced decisions. Include feedback from others and how it shaped the direction ("Mark gave us feedback that this felt like trying to build two separate games").
 
 ### 🚫 Patterns to Actively Avoid (Crucial Negative Constraints - Strict Prohibitions)
 
-- **ABSOLUTELY NO Generic Introductions/Conclusions**: **DO NOT** write introductory sentences setting broad context or concluding paragraphs summarizing the work, listing takeaways, or stating future plans. Start with the first concrete action/thought; end with the last documented one.
-- **AVOID Overly Optimistic/Promotional Tone**: Report facts, including difficulties, bugs, and failures, neutrally and directly as they happened. **DO NOT** downplay problems, inject artificial positivity, or frame everything as a seamless success.
-- **ELIMINATE Hedging/Vagueness**: **Replace** phrases like "it might be," "perhaps," "seems like," "could potentially," "it appears that" with direct statements based on the documented experience ("I observed X," "The result was Y," "The error indicated Z," "I decided to..."). Be specific and factual about *your* process.
-- **MINIMIZE Formulaic Transitions**: **Avoid** overuse of "Furthermore," "Moreover," "Additionally," "However," "Thus," "Therefore." Rely on the logical/chronological flow. Use simpler, natural transitions sparingly if needed ("Then," "Next," "So," "Because," "After that").
-- **DO NOT Impose Narrative Arcs**: **Resist** structuring the log like a story (setup, conflict, resolution). The factual sequence of technical steps, thoughts, and debugging efforts *is* the required structure.
-- **AVOID Writing for a Generic Audience / Instructional Tone**: **DO NOT** explain general programming concepts, common tools, or basic syntax unless the reference examples specifically do so in a similar context. **CRITICAL: DO NOT adopt an instructional or textbook-like tone.** Focus on the specifics of *this particular process* and the decisions *you* made. Assume the reader has the necessary background context or is primarily interested in *your* experience.
-- **REJECT Formal/Academic Language**: Use simple, direct language. **Avoid** unnecessarily complex sentence structures or vocabulary not found in the reference examples. Match the natural, sometimes informal, conversational tone seen in the examples.
-- **DO NOT Create Polished Narratives**: **Explicitly include** the dead ends, bugs encountered, mistakes made, inefficient paths taken, and moments of confusion. The goal is to document the *real, messy process*, not a sanitized or idealized version.
-- **ENSURE Varied Sentence Structure**: **Actively vary** sentence length and beginnings. Avoid long sequences of sentences starting with "I did X. Then I did Y. Next, I did Z." Mix simple and slightly more complex sentences naturally to mimic human writing patterns.
-- **NO MENTION OF AI:** The generated blog post **MUST NOT** contain any reference to GitHub Copilot, the AI assistant, the chat interface, or the process of interacting with the AI. It must read as if written solely by the human developer.
+- **NO Overly Polished or Linear Narratives**: **DO NOT** clean up the development process to make it seem smooth or inevitable. Include false starts, pivots, and honest assessments of what didn't work.
+- **AVOID Hiding Design Process Messiness**: **DO NOT** present final solutions without showing the iterative thinking, brainstorming lists, and decision-making process that led to them.
+- **ELIMINATE Formal Technical Writing**: **DO NOT** use academic or overly professional language. Maintain the casual, conversational tone even when discussing complex technical concepts.
+- **NO Suppression of Uncertainty**: **DO NOT** hide areas where decisions haven't been made or problems haven't been solved. Include open questions and areas of ongoing exploration.
+- **AVOID Generic Problem-Solution Templates**: **DO NOT** force every section into a rigid problem-solution format if the actual development was more exploratory or iterative.
+- **NO Removal of Personal Reactions**: **DO NOT** sanitize honest reactions to tools, processes, or constraints. Include authentic assessments and preferences.
+- **ELIMINATE Overly Structured Lists**: **DO NOT** force natural thought processes into rigid organizational structures. Allow for organic flow and tangential thinking.
+- **NO MENTION OF AI**: The generated blog post **MUST NOT** contain any reference to GitHub Copilot, the AI assistant, the chat interface, or the process of interacting with AI. It must read as if written solely by the human developer.
+- **AVOID Removing Constraints and Context**: **DO NOT** document technical decisions without the constraints, feedback, and real-world factors that influenced them.
+- **NO Over-Explanation of Obvious Decisions**: **DO NOT** laboriously explain routine technical choices. Focus explanation on areas where the decision-making process was genuinely complex or interesting.
 
 ### 🔗 Reference Examples (Canonical Source for Style Emulation)
 
@@ -331,8 +351,17 @@ In addition to the chat commands in `/`, the following behaviors are defined for
 1. **Input:** Use the technical context from the current chat session (code generated, problems solved, decisions made, errors encountered).
 2. **Action:** Generate a development log / blog post.
 3. **Style:** **Strictly adhere** to all rules in the "📝 **Writing Documentation Logs (Blog Format)**" section, emulating the **Reference Examples**.
-4. **Constraint:** The output **MUST NOT** mention GitHub Copilot, AI, or the chat interaction itself.
-5. **Output:** Save the generated Markdown content to a new file in `/Documentation/Posts/` (create directory if needed). Suggest filename `YYYY-MM-DD-topic-summary.md`.
+4. **Context Utilization:** Extract and utilize:
+   - Specific technical decisions made during the session
+   - Debugging processes and their outcomes
+   - Failed approaches and why they didn't work
+   - Tool/library choices and rationale
+   - Configuration changes and their effects
+   - Any research or documentation consulted
+5. **Reference Integration:** If specific reference examples are available in the chat context, use them as primary style guides. If not available, request access to the most relevant examples based on project type.
+6. **Constraint:** The output **MUST NOT** mention GitHub Copilot, AI, or the chat interaction itself.
+7. **Output:** Save the generated Markdown content to a new file in `/Documentation/Posts/` (create directory if needed). Suggest filename `YYYY-MM-DD-topic-summary.md`.
+8. **Iterative Improvement:** After generating initial content, offer to refine based on specific voice/style feedback.
 
 ### `export chat history` (or similar requests)
 
